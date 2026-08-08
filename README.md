@@ -11,7 +11,7 @@ with DuckDB over HTTPS. Nothing is downloaded to disk.
 
 **Run it:** click the *Open in Colab* badge, or open
 [`ausa_attorney_tracker.ipynb`](ausa_attorney_tracker.ipynb) and run top to
-bottom. Dependencies (`duckdb`, `pandas`, `matplotlib`) are installed by the
+bottom. Dependencies (`duckdb`, `pandas`, `great_tables`) are installed by the
 notebook if missing.
 
 ## Scope: DC vs. rest-of-country, not state-by-state
@@ -42,20 +42,18 @@ covering **Nov 2024 (pre-inauguration baseline) through present**:
   in the config cell controls this — set it to 1 for full monthly resolution
   if you're willing to wait longer.
 
-Four heatmaps — one row per area (DC, rest-of-country), columns = every
-distinct month present, values annotated on each cell: headcount, hires,
-separations, and net (hires − separations). The net heatmap is the most
-direct read on workforce trajectory — it's what actually surfaces the 2025
-attrition spike (deep losses concentrated at Jan 2025 and Sep 2025 in both
-areas) rather than a hiring slowdown.
+Four [great_tables](https://posit-dev.github.io/great-tables/) color-shaded
+tables — one row per month, DC and rest-of-country as separate columns each
+colored on its own scale (a matplotlib `imshow` heatmap was tried first and
+was hard to read at this size): headcount, hires, separations, and net
+(hires − separations). The net table is the most direct read on workforce
+trajectory — it's what actually surfaces the 2025 attrition spike (deep red
+at Jan 2025 and Sep 2025 in both areas) rather than a hiring slowdown.
 
-A handful of stray months outside Nov 2024–present can show up in the
-accessions/separations heatmaps: a file named for one month can contain a
-late-processed correction with an older effective date, and those are read
-as real events straight from the data's own date column rather than filtered
-out. Accessions' and separations' stray months don't line up with each
-other — hires and departures are independent transaction streams with their
-own separate correction cycles.
+Accessions/separations are filtered to exactly Nov 2024–present: a file
+named for one month can contain a late-processed correction with an older
+effective date, and `query_monthly` filters on the data's own date column
+(not just on which files get fetched) to keep those out.
 
 `START_YM`/`END_YM` in the config cell are plain variables you can widen back
 to 2005-01 (accessions/separations) or 2005-05 (employment) for full history.
