@@ -45,12 +45,20 @@ covering **Nov 2024 (pre-inauguration baseline) through present**:
 Four [great_tables](https://posit-dev.github.io/great-tables/) color-shaded
 tables — one row per month, DC / rest-of-country / **Total** (their sum,
 so nationwide headcount is never a mental-math exercise) as separate
-columns each colored on its own scale (a matplotlib `imshow` heatmap was
-tried first and was hard to read at this size): headcount, hires,
-separations, and net (hires − separations). The net table is the most
-direct read on workforce trajectory — it's what actually surfaces the 2025
-attrition spike (deep red at Jan 2025 and Sep 2025 in both areas) rather
-than a hiring slowdown.
+columns (a matplotlib `imshow` heatmap was tried first and was hard to
+read at this size): headcount, hires, separations, and net
+(hires − separations).
+
+Color means the same thing everywhere in the notebook, not just within one
+table: **red is always bad, blue is always good.** Hires are colored blue
+(more = better); separations are colored red (more = worse) — using the
+same "darker = more" scale for both, with no good/bad signal, would have
+made identical colors mean opposite things in adjacent tables. Net hires
+and the headcount % columns use a diverging red(loss)/blue(gain) scale
+centered on zero or on the baseline. The net table is the most direct read
+on workforce trajectory — it's what actually surfaces the 2025 attrition
+spike (deep red at Jan 2025 and Sep 2025 in both areas) rather than a
+hiring slowdown.
 
 The headcount table additionally indexes each of DC/rest-of-country/Total
 to the first available month (Nov 2024, pre-inauguration) as a 100%
