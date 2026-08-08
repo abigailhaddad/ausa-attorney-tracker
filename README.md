@@ -56,6 +56,12 @@ The headcount table additionally indexes each of DC/rest-of-country/Total
 to the first available month (Nov 2024, pre-inauguration) as a 100%
 baseline, so loss reads as a percentage — by late 2025 DC, rest-of-country,
 and the nationwide total all sit around 86% of their Nov 2024 headcount.
+The raw headcount columns there are deliberately left uncolored: coloring
+both the raw counts (high = dark = good) and the % columns (far from
+baseline = dark = bad) in the same row told two contradictory stories with
+the same visual weight. Only the % columns carry color, and all three
+share one domain so DC's shade is directly comparable to rest-of-country's
+rather than each being scaled independently.
 
 Accessions/separations are filtered to exactly Nov 2024–present: a file
 named for one month can contain a late-processed correction with an older
