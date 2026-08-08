@@ -29,21 +29,33 @@ state-level detail the underlying data doesn't actually contain.
 
 ## What's in the notebook
 
-Three live queries, each grouped by month and by area (DC / rest-of-country):
+Three live queries, each grouped by month and by area (DC / rest-of-country),
+covering **Nov 2024 (pre-inauguration baseline) through present**:
 
-- **Employment** — monthly headcount snapshots (`snapshot_yyyymm`)
 - **Accessions** — monthly hires (`personnel_action_effective_date_yyyymm`)
 - **Separations** — monthly departures (same date field)
+- **Employment** — headcount snapshots (`snapshot_yyyymm`), sampled every 3rd
+  available month (~quarterly) rather than pulled monthly — those files are
+  the full federal workforce each month (26–75 MiB apiece) filtered down to
+  ~6,000 AUSA rows, and querying all of them monthly is both slow and enough
+  to trip HuggingFace's rate limit on repeated large-file reads. `EMPLOYMENT_SAMPLE_STRIDE`
+  in the config cell controls this — set it to 1 for full monthly resolution
+  if you're willing to wait longer.
 
-Four heatmaps (year x month, DC and rest-of-country side by side):
-headcount, hires, separations, and net (hires − separations). The net heatmap
-is the most direct read on workforce trajectory — it's what actually surfaces
-the 2025 attrition spike (separations roughly tripled that year against a
-decade-long ~350–590/year baseline) rather than a hiring slowdown.
+Four heatmaps — one row per area (DC, rest-of-country), columns = every
+distinct month present, values annotated on each cell: headcount, hires,
+separations, and net (hires − separations). The net heatmap is the most
+direct read on workforce trajectory — it's what actually surfaces the 2025
+attrition spike (deep losses concentrated at Jan 2025 and Sep 2025 in both
+areas) rather than a hiring slowdown.
 
-`START_YM`/`END_YM` in the config cell default to 2015-01–present, comfortably
-inside the well-populated EHRI schema era; both are plain variables you can
-widen back to 2005-01 (accessions/separations) or 2005-05 (employment) if you
-want the full history — expect the employment query to take a few minutes
-longer since those files run 26–75 MiB each vs. accessions'/separations'
-KiB-to-low-MiB files.
+A handful of stray months outside Nov 2024–present can show up in the
+accessions/separations heatmaps: a file named for one month can contain a
+late-processed correction with an older effective date, and those are read
+as real events straight from the data's own date column rather than filtered
+out. Accessions' and separations' stray months don't line up with each
+other — hires and departures are independent transaction streams with their
+own separate correction cycles.
+
+`START_YM`/`END_YM` in the config cell are plain variables you can widen back
+to 2005-01 (accessions/separations) or 2005-05 (employment) for full history.
