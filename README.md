@@ -43,12 +43,19 @@ covering **Nov 2024 (pre-inauguration baseline) through present**:
   if you're willing to wait longer.
 
 Four [great_tables](https://posit-dev.github.io/great-tables/) color-shaded
-tables — one row per month, DC and rest-of-country as separate columns each
-colored on its own scale (a matplotlib `imshow` heatmap was tried first and
-was hard to read at this size): headcount, hires, separations, and net
-(hires − separations). The net table is the most direct read on workforce
-trajectory — it's what actually surfaces the 2025 attrition spike (deep red
-at Jan 2025 and Sep 2025 in both areas) rather than a hiring slowdown.
+tables — one row per month, DC / rest-of-country / **Total** (their sum,
+so nationwide headcount is never a mental-math exercise) as separate
+columns each colored on its own scale (a matplotlib `imshow` heatmap was
+tried first and was hard to read at this size): headcount, hires,
+separations, and net (hires − separations). The net table is the most
+direct read on workforce trajectory — it's what actually surfaces the 2025
+attrition spike (deep red at Jan 2025 and Sep 2025 in both areas) rather
+than a hiring slowdown.
+
+The headcount table additionally indexes each of DC/rest-of-country/Total
+to the first available month (Nov 2024, pre-inauguration) as a 100%
+baseline, so loss reads as a percentage — by late 2025 DC, rest-of-country,
+and the nationwide total all sit around 86% of their Nov 2024 headcount.
 
 Accessions/separations are filtered to exactly Nov 2024–present: a file
 named for one month can contain a late-processed correction with an older
