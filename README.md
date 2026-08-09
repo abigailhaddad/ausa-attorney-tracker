@@ -61,20 +61,21 @@ covering **Nov 2024 (pre-inauguration baseline) through present**:
 
 - **Accessions** — monthly hires (`personnel_action_effective_date_yyyymm`)
 - **Separations** — monthly departures (same date field)
-- **Employment** — headcount snapshots (`snapshot_yyyymm`), sampled every 3rd
-  available month (~quarterly) rather than pulled monthly — those files are
-  the full federal workforce each month (26–75 MiB apiece) filtered down to
-  ~6,000 AUSA rows, and querying all of them monthly is both slow and enough
-  to trip HuggingFace's rate limit on repeated large-file reads. `EMPLOYMENT_SAMPLE_STRIDE`
-  in the config cell controls this — set it to 1 for full monthly resolution
-  if you're willing to wait longer.
+- **Employment** — headcount snapshots (`snapshot_yyyymm`), pulled every 3rd
+  available month (a fixed quarterly interval, not a statistical sample)
+  rather than every month — those files are the full federal workforce each
+  month (26–75 MiB apiece) filtered down to ~6,000 AUSA rows, and querying
+  all of them monthly is both slow and enough to trip HuggingFace's rate
+  limit on repeated large-file reads. `EMPLOYMENT_MONTH_STRIDE` in the
+  config cell controls this — set it to 1 for full monthly resolution if
+  you're willing to wait longer.
 
 Four [great_tables](https://posit-dev.github.io/great-tables/) color-shaded
-tables — one row per month, DC / rest-of-country / **Total** (their sum,
-so nationwide headcount is never a mental-math exercise) as separate
-columns (a matplotlib `imshow` heatmap was tried first and was hard to
-read at this size): headcount, hires, separations, and net
-(hires − separations).
+tables — one row per month, DC and rest-of-country as separate columns (a
+matplotlib `imshow` heatmap was tried first and was hard to read at this
+size): headcount, hires, separations, and net (hires − separations). No
+Total column: rest-of-country outnumbers DC ~10:1, so a sum just mirrors
+rest-of-country's pattern almost exactly without adding real signal.
 
 Color means the same thing everywhere in the notebook, not just within one
 table: **red is always bad, blue is always good.** Hires are colored blue
@@ -87,16 +88,16 @@ on workforce trajectory — it's what actually surfaces the 2025 attrition
 spike (deep red at Jan 2025 and Sep 2025 in both areas) rather than a
 hiring slowdown.
 
-The headcount table additionally indexes each of DC/rest-of-country/Total
-to the first available month (Nov 2024, pre-inauguration) as a 100%
-baseline, so loss reads as a percentage — by late 2025 DC, rest-of-country,
-and the nationwide total all sit around 86% of their Nov 2024 headcount.
-The raw headcount columns there are deliberately left uncolored: coloring
-both the raw counts (high = dark = good) and the % columns (far from
-baseline = dark = bad) in the same row told two contradictory stories with
-the same visual weight. Only the % columns carry color, and all three
-share one domain so DC's shade is directly comparable to rest-of-country's
-rather than each being scaled independently.
+The headcount table additionally indexes each of DC/rest-of-country to the
+first available month (Nov 2024, pre-inauguration) as a 100% baseline, so
+loss reads as a percentage — by late 2025 DC and rest-of-country both sit
+around 86–87% of their Nov 2024 headcount. The raw headcount columns there
+are deliberately left uncolored: coloring both the raw counts (high = dark
+= good) and the % columns (far from baseline = dark = bad) in the same row
+told two contradictory stories with the same visual weight. Only the %
+columns carry color, and both share one domain so DC's shade is directly
+comparable to rest-of-country's rather than each being scaled
+independently.
 
 Accessions/separations are filtered to exactly Nov 2024–present: a file
 named for one month can contain a late-processed correction with an older
@@ -108,8 +109,9 @@ to 2005-01 (accessions/separations) or 2005-05 (employment) for full history.
 
 ## Every table stands alone
 
-Each table's title states what it is, the cadence (monthly, or "sampled
-~quarterly" for headcount), and the career-attorneys-only scope; a source
+Each table's title states what it is, the cadence (monthly, or "every 3rd
+available month (quarterly interval)" for headcount — a fixed interval,
+not a statistical sample), and the career-attorneys-only scope; a source
 note on every table states where the data comes from and that "DC /
 rest-of-country" is the finest area breakdown available (not full
 state-level detail — see the scope note above). None of this depends on
