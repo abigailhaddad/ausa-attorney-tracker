@@ -99,12 +99,20 @@ up to, not the other way around.
 `START_YM`/`END_YM` in the config cell are plain variables you can widen
 back to 2005-05 for full employment history.
 
-## The table stands alone
+A second, 4-row **key-months** table follows the full one — same styling,
+just filtered down to the baseline month, Feb 2025 (DC's sharp early
+drop), Sep 2025 (the shared national low both areas converged toward), and
+whatever the latest available month is. Meant for a screenshot where the
+full monthly table is too tall (e.g. a social post); the last of the four
+months updates itself as new data arrives (`df_employment.ym.max()`) so it
+doesn't need editing by hand.
 
-Its title states what it is, the cadence ("Every available month" or
-"Every N months" if you raise the stride — a fixed interval, not a
+## The tables stand alone
+
+Each one's title states what it is, the cadence ("Every available month",
+"Every N months" if you raise the stride, or "4 key months" — never a
 statistical sample), and the career-attorneys-only scope; a source note
 states where the data comes from and that "DC / rest-of-country" is the
 finest area breakdown available (not full state-level detail — see the
 scope note above). None of this depends on surrounding notebook text, so a
-screenshot of just the table is still fully interpretable on its own.
+screenshot of just one table is still fully interpretable on its own.
