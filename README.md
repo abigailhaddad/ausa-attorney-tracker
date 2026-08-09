@@ -36,7 +36,8 @@ strength:
 - **pay plan (the strong one)** — 100% GS/ES/SL, where every other DC career
   attorney is 100% AD, DOJ's attorney schedule. Exceptionless across all 20
   months: 803 person-months here, none on AD; 8,833 for the rest of DC, none
-  on anything else. Two pay systems that never mix are two organizations.
+  on anything else. Two pay systems with zero overlap over 20 months is hard
+  to explain except as two separate organizations.
 - **supervisory share** — 40.9% supervisor or manager vs. 12.4% for the rest
   of DC (Nov 2024).
 - **geography (the weak one)** — 44 of the 61 people nationwide with this code
@@ -45,8 +46,8 @@ strength:
   Springs NY, Collegeville PA), but most are in cities that *are* (Columbia
   SC, Houston, Chicago, Minneapolis). Mildly corroborating, not proof.
 
-Excluding it moves DC's latest figure from 87.3% to 87.6% of baseline — which
-is the point. The fixable part of the problem wasn't the problem:
+Excluding it barely changes anything — DC's latest figure goes from 87.3% to
+87.6% of baseline — and the gap it was supposed to explain is still there:
 
 | | Nov 2024 | Jun 2026 |
 |---|---|---|
@@ -66,10 +67,10 @@ The likeliest explanation for the leftover is that EOUSA headquarters employs
 a substantial number of attorneys on the same AD schedule, in the same city,
 under the same subelement, whose `personnel_office_identifier_code` is
 redacted like everyone else's. They can't be pulled out because the leftover
-group is *homogeneous* on everything the data exposes — 100% AD, 100% duty
-city Washington, ~99% excepted service, split across the two ordinary AUSA
-appointment codes. Personnel office `4261` announced itself by running on a
-different pay system; these 491 leave no seam to cut along.
+group is uniform on everything the data exposes — 100% AD, 100% duty city
+Washington, ~99% excepted service, split across the two ordinary AUSA
+appointment codes. Personnel office `4261` was separable because it runs on a
+different pay system. Nothing distinguishes these 491 the same way.
 
 ## What that costs you
 
