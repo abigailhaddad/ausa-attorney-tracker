@@ -27,6 +27,34 @@ threshold and reports a real number. So the only two honest "area" buckets are
 **DC** and **rest-of-country (aggregate)** — the notebook does not fabricate
 state-level detail the underlying data doesn't actually contain.
 
+## "DC" is not exactly "the DC U.S. Attorney's Office"
+
+DOJ's own page for USAO-DC cites ~330-350 AUSAs — well below this
+notebook's DC count (467-538 across the window). `agency_subelement`
+combines EOUSA's national headquarters (physically based in DC) with all
+93 individual U.S. Attorney's offices as one label; EHRI doesn't track
+them separately.
+
+Checked directly: at least 44 of DC's 538 (Nov 2024) sit in a structurally
+distinct group —
+
+- `personnel_office_identifier_code = 4261`: mostly DC (44 of 48
+  nationwide), the rest scattered 1-3 people at a time in cities that
+  aren't typical USAO district seats (Old Saybrook CT, Saratoga Springs
+  NY, Anchorage AK) — the pattern you'd expect from a centralized HQ
+  personnel office, not a normal field office
+- **GS-graded** (13-15), not DOJ's usual attorney AD pay scale (21-40)
+  that the other 494 use
+- **~40% supervisor/manager**, vs. ~13% in the rest
+
+All consistent with EOUSA HQ staff, not USAO-DC prosecutors. The remaining
+~494 can't be split further with available fields — the finer
+office-identifier is redacted for that whole group — so the true HQ
+contribution, and therefore how much of "DC" is really USAO-DC, is
+bounded (at least 44) but not fully known. Read "DC" as DC-based
+EOUSA/USAO staff broadly, not literally the DC U.S. Attorney's Office
+headcount.
+
 ## Scope: career attorneys only, not political appointees
 
 `appointment_type` is used to exclude political appointments from the
