@@ -14,25 +14,6 @@ with DuckDB over HTTPS. Nothing is downloaded to disk.
 bottom. Dependencies (`duckdb`, `pandas`, `great_tables`) are installed by the
 notebook if missing.
 
-## Scope: employment/headcount only, not accessions/separations
-
-OPM's own guidance is that when the flow data (accessions/separations,
-keyed to each personnel action's effective date) disagrees with the
-employment snapshot (keyed to snapshot date), the employment snapshot is
-authoritative. They do disagree, sometimes by a lot in a single month:
-checked directly, DC's accessions-minus-separations net for Jan 2025 was
--30 (-5.6% of headcount), but DC's actual headcount barely moved that
-month (531→528) — most of the drop landed in **February's** snapshot
-instead (528→492). An earlier version of this notebook built hires/
-separations/net tables from accessions/separations; they're gone now,
-replaced by this single employment-only table, so nothing here can
-contradict a number someone gets from the headcount data directly.
-
-The accessions/separations datasets still exist in the same HF repo
-(`accessions/`, `separations/`, same schema pattern used here) if you want
-to reconstruct hires/departures yourself — just budget for that mismatch
-before trusting a single-month number out of them.
-
 ## Scope: DC vs. rest-of-country, not state-by-state
 
 The obvious next step — breaking AUSA headcount down by state or district — isn't
