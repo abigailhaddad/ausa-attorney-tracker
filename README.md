@@ -27,6 +27,33 @@ threshold and reports a real number. So the only two honest "area" buckets are
 **DC** and **rest-of-country (aggregate)** — the notebook does not fabricate
 state-level detail the underlying data doesn't actually contain.
 
+## Scope: career attorneys only, not political appointees
+
+`appointment_type` is used to exclude political appointments from every
+query, so hiring/departure/headcount figures track the career AUSA
+workforce rather than political leadership turnover. Three distinct legal
+categories of political appointment show up in this data, and all three
+are excluded (`POLITICAL_APPOINTMENT_TYPES` in the config cell):
+
+- **Schedule C** (5 CFR 213.3301) — confidential/policy staff
+- **Noncareer SES** — senior-executive-level political appointees
+- **`EXECUTIVE (EXCEPTED SERVICE NONPERMANENT)`** — always pay plan `AD`,
+  grade `40`, "supervisor or manager," one single consistent combination —
+  consistent with the U.S. Attorney / top leadership slot per district
+  (Presidentially-appointed, Senate-confirmed), not a career classification
+
+Schedule C alone would miss the other two — it's only the "junior" tier of
+political appointment, not an umbrella term for all of it, and it would
+specifically miss the U.S. Attorney position itself, arguably the single
+most obviously political role in the office.
+
+One value that stays IN despite sounding temporary:
+`OTHER (EXCEPTED SERVICE NONPERMANENT)` is the single largest bucket of
+ordinary AUSA hires. Checked back to 2015 — it's the dominant appointment
+code for AUSA hiring in every year on record, not a marker of temporary or
+surge staffing specific to any period. Excluding it would have gutted
+~98% of all AUSA hiring data going back a decade, for no real signal.
+
 ## What's in the notebook
 
 Three live queries, each grouped by month and by area (DC / rest-of-country),
@@ -78,3 +105,13 @@ effective date, and `query_monthly` filters on the data's own date column
 
 `START_YM`/`END_YM` in the config cell are plain variables you can widen back
 to 2005-01 (accessions/separations) or 2005-05 (employment) for full history.
+
+## Every table stands alone
+
+Each table's title states what it is, the cadence (monthly, or "sampled
+~quarterly" for headcount), and the career-attorneys-only scope; a source
+note on every table states where the data comes from and that "DC /
+rest-of-country" is the finest area breakdown available (not full
+state-level detail — see the scope note above). None of this depends on
+surrounding notebook text, so a screenshot of just one table is still
+fully interpretable on its own.
